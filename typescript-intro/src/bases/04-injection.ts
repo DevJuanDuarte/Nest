@@ -1,6 +1,6 @@
 // import axios from 'axios';
 import { Move, PokeapiResponse } from '../interfaces/pokeapi-response.interface';
-import { PokeApiAdapter } from '../api/pokeApi.adapter';
+import { HttpAdaptador, PokeApiAdapter, PokeApiFetchAdapter } from '../api/pokeApi.adapter';
 
 export class Pokemon {
 
@@ -12,7 +12,7 @@ export class Pokemon {
         public readonly id: number, 
         public name: string,
         // Todo: inyectar dependencias
-        private readonly http:PokeApiAdapter
+        private readonly http:HttpAdaptador
 
     ) {}
 
@@ -26,16 +26,17 @@ export class Pokemon {
 
     async getMoves(): Promise<Move[]> {
         // const { data } = await axios.get<PokeapiResponse>('https://pokeapi.co/api/v2/pokemon/4');
-        const data = await this.http.get('https://pokeapi.co/api/v2/pokemon/4');
-        console.log( data.moves );
+        const data = await this.http.get<PokeapiResponse>('https://pokeapi.co/api/v2/pokemon/4');
+        console.log( data.moves[0].move.name );
         
         return data.moves;
     }
 
 }
 
-const pokeApi = new PokeApiAdapter();
+const pokeApiAxios = new PokeApiAdapter();//Instancia de la clase.
+const pokeApiFetch = new PokeApiFetchAdapter();//Instancia de la clase.
 
-export const charmander = new Pokemon( 4, 'Charmander', pokeApi);
+export const charmander = new Pokemon( 4, 'Charmander', pokeApiAxios);
 
 charmander.getMoves();
