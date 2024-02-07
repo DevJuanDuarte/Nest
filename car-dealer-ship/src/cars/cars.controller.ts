@@ -2,8 +2,8 @@ import { Body, Controller, Delete, Get, Param, ParseIntPipe, ParseUUIDPipe, Patc
 import { CarsService } from './cars.service';
 import { CreateCarDto } from './dto/create-car.dto';
 
-@UsePipes(ValidationPipe)
 @Controller('cars')
+// @UsePipes(ValidationPipe)
 export class CarsController {
 
   constructor(
