@@ -9,12 +9,12 @@ export class BrandsService {
 
   // 2.Se crea una propiedad llamada brand de tipo del entity que se creo, este sera un arreglo.
   private brands: Brand[] = [
-    {
-      // Se debe importar el uuid(), siempre es de tipo string
-      id: uuid(),
-      name: 'Toyota',
-      createdAt: new Date().getTime()
-    }
+    // {
+    //   // Se debe importar el uuid(), siempre es de tipo string
+    //   id: uuid(),
+    //   name: 'Toyota',
+    //   createdAt: new Date().getTime()
+    // }
   ]
 
 
@@ -99,4 +99,8 @@ export class BrandsService {
   // La nueva lista filtrada se asigna nuevamente a this.brands, reemplazando la lista original.
     this.brands = this.brands.filter(brand => brand.id !== id);
   }
+
+  fillBrandsWithSeedData(brands: Brand[]) {
+    this.brands = brands;
+}
 }
